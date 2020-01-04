@@ -10,7 +10,7 @@ public class GridMaster : MonoBehaviour
 
     // refs
     [SerializeField] GameMaster master;
-    [SerializeField] GameObject simpleTilePrefab;
+    [SerializeField] GameObject tilePrefab;
     [SerializeField] GameObject tileHolder;
 
     // grid
@@ -24,8 +24,8 @@ public class GridMaster : MonoBehaviour
         {
             for (int countD = 0; countD < depth; countD++)
             {
-                Vector3 newTilePosition = new Vector3((float)countW, 0f, (float)countD);
-                Instantiate(simpleTilePrefab, newTilePosition, Quaternion.identity, tileHolder.transform);
+                Vector3 newTilePosition = new Vector3((float)countW, -0f, (float)countD);
+                Instantiate(tilePrefab, newTilePosition, Quaternion.identity, tileHolder.transform);
             }
         }
     }
