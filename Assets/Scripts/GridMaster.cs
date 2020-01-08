@@ -25,7 +25,9 @@ public class GridMaster : MonoBehaviour
             for (int countD = 0; countD < depth; countD++)
             {
                 Vector3 newTilePosition = new Vector3((float)countW, -0f, (float)countD);
-                Instantiate(tilePrefab, newTilePosition, Quaternion.identity, tileHolder.transform);
+                GameObject newTile = Instantiate(tilePrefab, newTilePosition, Quaternion.identity, tileHolder.transform);
+                newTile.layer = tileHolder.gameObject.layer;
+
             }
         }
     }

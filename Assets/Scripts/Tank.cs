@@ -10,6 +10,7 @@ public class Tank : MonoBehaviour
     // Data
     public TankData tankData;
     private WeaponType currentWeapon;
+    private Turret turret;
 
     // modifiers
     private float sizeFactor;
@@ -18,14 +19,21 @@ public class Tank : MonoBehaviour
     private float accuracyFactor;
     private float rotationSpeedFactor;
 
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
+        tankData = new TankData();
         player = GetComponentInParent<PlayerController>();
         // Debug.Log("Got player: " + player.ToString());
-        // init data
-        tankData = new TankData();
+        turret = player.GetComponentInChildren<Turret>();
+        CalculateFactors();
+        turret.currentTurret = currentWeapon;
+        Debug.Log("Got turret");
+    }
 
+    void Start()
+    {
+        // init data
     }
 
     // Update is called once per frame
@@ -50,34 +58,9 @@ public class Tank : MonoBehaviour
 
     private void UpdateVisualModel()
     {
-        switch (currentWeapon)
+        if (currentWeapon != turret.currentTurret)
         {
-            case WeaponType.Gun:
-            {
-                player.tankTurretGun.SetActive(true);
-                player.tankTurretRocket.SetActive(false);
-                player.tankTurretRayGun.SetActive(false);
-                player.tankRocket.SetActive(false);
-            }
-            break;
-            case WeaponType.Rocket:
-            {
-                player.tankTurretGun.SetActive(false);
-                player.tankTurretRocket.SetActive(true);
-                player.tankTurretRayGun.SetActive(false);
-                player.tankRocket.SetActive(true);
-            }
-            break;
-            case WeaponType.Raygun:
-            {
-                player.tankTurretGun.SetActive(false);
-                player.tankTurretRocket.SetActive(false);
-                player.tankTurretRayGun.SetActive(true);
-                player.tankRocket.SetActive(false);
-            }
-            break;
-            default:
-                throw new ArgumentOutOfRangeException("Tank: Trying to update visuals by a non-existing weapon type");
+            turret.SwitchTurret(currentWeapon);
         }
     }
 }
