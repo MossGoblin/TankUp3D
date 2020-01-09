@@ -7,7 +7,7 @@ public class CameraControl : MonoBehaviour
     // refs
     [SerializeField] private Transform playerChasis;
     [SerializeField] private Transform playerTurret;
-    private Camera camera;
+    public Camera camera;
     [SerializeField] public bool followChasis = true;
 
     [Range(0.01f, 1.0f)]
@@ -25,7 +25,7 @@ public class CameraControl : MonoBehaviour
 
     void Awake()
     {
-        camera = GetComponent<Camera>();
+        // camera = GetComponent<Camera>();
     }
 
     void LateUpdate()

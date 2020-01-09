@@ -7,6 +7,8 @@ public class GameMaster : MonoBehaviour
     //refs
     [SerializeField] public PlayerController player;
     [SerializeField] public GridMaster gridMaster;
+    [SerializeField] public CameraControl cameraMaster;
+    [SerializeField] public MouseController mouseMaster;
 
     // Start is called before the first frame update
     void Awake()
