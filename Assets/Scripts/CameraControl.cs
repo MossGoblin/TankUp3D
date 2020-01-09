@@ -7,6 +7,7 @@ public class CameraControl : MonoBehaviour
     // refs
     [SerializeField] private Transform playerChasis;
     [SerializeField] private Transform playerTurret;
+    private Camera camera;
     [SerializeField] public bool followChasis = true;
 
     [Range(0.01f, 1.0f)]
@@ -16,11 +17,15 @@ public class CameraControl : MonoBehaviour
     [SerializeField] public float rotateSmoothFactor = 0.5f;
 
     // [SerializeField] private Vector3 cameraOffset;
+    [Range(0.0f, 100f)]
     [SerializeField] private float cameraHorizontalOffset;
+
+    [Range(0.0f, 100f)]
     [SerializeField] private float cameraVerticalOffset;
 
-    void Start()
+    void Awake()
     {
+        camera = GetComponent<Camera>();
     }
 
     void LateUpdate()
@@ -28,6 +33,7 @@ public class CameraControl : MonoBehaviour
         // Vector3 cameraOffset = playerChasis.transform.forward * -cameraHorizontalOffset + playerChasis.transform.up * cameraVerticalOffset;
         // Vector3 targetPosition = playerChasis.transform.position + cameraOffset;
         // transform.position = Vector3.Slerp(transform.position, targetPosition, moveSmoothFactor);
+
         if (followChasis)
         {
             AdjustRotation(playerChasis);
