@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TankData
@@ -47,9 +48,25 @@ public class TankData
         }
         return result;
     }
+    public int[] GetStateCollection()
+    {
+        int numberOfWeaponTypes = Enum.GetNames(typeof(WeaponType)).Length;
+        int[] stateArray = new int[numberOfWeaponTypes]; // number of weapon types
+        foreach (Layer layer in layerStack)
+        {
+            stateArray[(int)layer.type]++;
+        }
+        return stateArray;
+    }
 
     public void AddLayer(Layer newLayer)
     {
         layerStack.Push(newLayer);
     }
+
+    public Layer RemoveLayer()
+    {
+        return layerStack.Pop();
+    }
+
 }

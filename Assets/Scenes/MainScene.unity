@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 306579749}
   - component: {fileID: 306579748}
   m_Layer: 0
-  m_Name: MouseMaster
+  m_Name: InputMaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -721,7 +721,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 3.0092666e-36, y: 1.009742e-28, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -843,13 +843,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   master: {fileID: 1040170810}
-  speed: 10
-  rotationSpeed: 3
+  baseSpeed: 10
+  currentSpeed: 0
+  baseRotationSpeed: 3
+  currentRotationSpeed: 0
   groundCheck: {fileID: 186913936}
   groundDistance: 0.25
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  playerTank: {fileID: 0}
   gravityFactor: 4
   controller: {fileID: 945959958}
 --- !u!114 &945959957
@@ -1103,7 +1106,7 @@ MonoBehaviour:
   player: {fileID: 945959957}
   gridMaster: {fileID: 902973136}
   cameraMaster: {fileID: 1206681038}
-  mouseMaster: {fileID: 306579748}
+  inputMaster: {fileID: 306579748}
 --- !u!4 &1040170811
 Transform:
   m_ObjectHideFlags: 0
