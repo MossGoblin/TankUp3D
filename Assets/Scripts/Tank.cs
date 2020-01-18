@@ -40,7 +40,6 @@ public class Tank : MonoBehaviour
         // init data
     }
 
-    // Update is called once per frame
     void Update()
     {
         CalculateFactors();
@@ -73,11 +72,9 @@ public class Tank : MonoBehaviour
 
     private void UpdateSize(float sizeFactor)
     {
-        // use \arctan\left(x-3\right)+2.25
-        // check \arctan\left(x-3\right)+2.25 at https://www.desmos.com/calculator
         if (currentScaleFactor != sizeFactor)
         {
-            float sigmoidFactor = Mathf.Atan((sizeFactor/2) - 3) + 2.5f;
+            float sigmoidFactor = ToolBox.Sigmoid(sizeFactor);
             float newScaleX = originalScale.x * sigmoidFactor;
             float newScaleY = originalScale.y * sigmoidFactor;
             float newScaleZ = originalScale.z * sigmoidFactor;

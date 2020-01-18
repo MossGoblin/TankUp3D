@@ -48,4 +48,14 @@ public static class ToolBox
             float disbalance = (meanDiff / maxStat); // should return 1 for full disbalance
             return disbalance;
         }
+
+        public static float Sigmoid(float input)
+        {
+            // use \arctan\left(x-3\right)+2.25
+            // check \arctan\left(x-3\right)+2.25 at https://www.desmos.com/calculator
+
+            // float result = Mathf.Atan((input/2) - 3) + 2.25f; // \arctan\left(x-3\right)+2.25
+            float result = (2/Mathf.PI) * (Mathf.Atan(Mathf.PI/2 * input - 3)) + 1.8f; // \frac{2}{\pi}\arctan\left(\frac{\pi}{2}x-3\right)+1.8 - NOT CORRECT!
+            return result;
+        }
 }

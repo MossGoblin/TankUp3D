@@ -48,6 +48,7 @@ public class TurretFollowMouse : MonoBehaviour
         float singleStep = currentTurretRotationSpeed * Time.deltaTime;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
         Debug.DrawRay(transform.position, newDirection*20, Color.red);
+        
         transform.rotation = Quaternion.LookRotation(newDirection);
         // Debug.Log("Direction " + newDirection);
         // // create a dummy at the target position

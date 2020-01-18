@@ -6,14 +6,14 @@ public class GameMaster : MonoBehaviour
 {
     //refs
     [SerializeField] public PlayerController player;
-    [SerializeField] public GridMaster gridMaster;
+    [SerializeField] public TerrainMaster gridMaster;
     [SerializeField] public CameraControl cameraMaster;
     [SerializeField] public InputController inputMaster;
 
     void Awake()
     {
         player = GameObject.FindObjectOfType<PlayerController>();
-        gridMaster = GameObject.FindObjectOfType<GridMaster>();
+        gridMaster = GameObject.FindObjectOfType<TerrainMaster>();
         cameraMaster = GameObject.FindObjectOfType<CameraControl>();
         inputMaster = GameObject.FindObjectOfType<InputController>();
     }
