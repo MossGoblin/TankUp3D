@@ -55,7 +55,14 @@ public static class ToolBox
             // check \arctan\left(x-3\right)+2.25 at https://www.desmos.com/calculator
 
             // float result = Mathf.Atan((input/2) - 3) + 2.25f; // \arctan\left(x-3\right)+2.25
-            float result = (2/Mathf.PI) * (Mathf.Atan(Mathf.PI/2 * input - 3)) + 1.8f; // \frac{2}{\pi}\arctan\left(\frac{\pi}{2}x-3\right)+1.8 - NOT CORRECT!
+            // float result = (2/Mathf.PI) * (Mathf.Atan(Mathf.PI/2 * input - 3)) + 1.8494549f; // \frac{2}{\pi}\arctan\left(\frac{\pi}{2}x-3\right)+1.8 - NOT CORRECT!
+            if (input == 2)
+            {
+                input += 0.01f;
+            }
+            float result = (input-2)/(1+Mathf.Abs(input-2)) + 1.666666f; // \\frac{x-2}{1+\left|x-2\right|}+1.6666666666666
             return result;
         }
 }
+
+// (2/Pi)*arctan( (Ping/2)*x - 3) + 1.8

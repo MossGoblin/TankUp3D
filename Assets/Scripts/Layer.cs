@@ -24,4 +24,20 @@ public class Layer
         }
         this.uses = uses;
     }
+
+    public void SetDurability(float delta)
+    {
+        if (delta > 100)
+        {
+            throw new ArgumentOutOfRangeException("Reduction of health for new layer can not exceed 100");
+        }
+        durability -= delta;
+    }
+
+    public void SetLayerBase(WeaponType type, float durability, int uses)
+    {
+        this.type = type;
+        this.durability = durability;
+        this.uses = uses;
+    }
 }

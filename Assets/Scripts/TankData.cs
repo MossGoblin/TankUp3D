@@ -18,12 +18,8 @@ public class TankData
 
     public TankData()
     {
-        int randomTypeIndex = UnityEngine.Random.Range(0, 3);
-        Array types = Enum.GetValues(typeof(WeaponType));
-        WeaponType randomType = (WeaponType)types.GetValue(randomTypeIndex);
-        Layer randomLayer = new Layer(randomType, 100, 3);
         layerStack = new Stack<Layer>();
-        layerStack.Push(randomLayer);
+        layerStack.Push(Factory.CreateRandomLayer());
     }
 
     public int GetStackSize()

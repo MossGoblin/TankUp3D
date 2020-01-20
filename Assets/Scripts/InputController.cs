@@ -41,28 +41,31 @@ public class InputController : MonoBehaviour
         // 1-3 for Custom Layers
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Layer newGunLayer = new Layer(WeaponType.Gun, 100, 3);
+            Layer newGunLayer = Factory.CreateLayer(WeaponType.Gun);
+            // Layer newGunLayer = new Layer(WeaponType.Gun, 100, 3);
             master.player.AddLayer(newGunLayer);
             DumpStack();
-
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Layer newRocketLayer = new Layer(WeaponType.Rocket, 100, 3);
+            Layer newRocketLayer = Factory.CreateLayer(WeaponType.Rocket);
+            // Layer newRocketLayer = new Layer(WeaponType.Rocket, 100, 3);
             master.player.AddLayer(newRocketLayer);
             DumpStack();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Layer newRaygunLayer = new Layer(WeaponType.Raygun, 100, 3);
+            Layer newRaygunLayer = Factory.CreateLayer(WeaponType.Raygun);
+            // Layer newRaygunLayer = new Layer(WeaponType.Raygun, 100, 3);
             master.player.AddLayer(newRaygunLayer);
             DumpStack();
         }
 
-        // NumPad - for removing layers
+        // NumPad '-' for removing layers
         if (Input.GetKeyDown(KeyCode.KeypadMinus) && master.player.tank.tankData.GetStackSize() > 1)
         {
-            master.player.tank.tankData.RemoveLayer();
+            Layer removedLayer = master.player.tank.tankData.RemoveLayer();
+            Factory.DeactivateLayer(removedLayer);
             DumpStack();
         }
     }
