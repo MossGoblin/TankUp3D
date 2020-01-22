@@ -47,7 +47,10 @@
   <ItemGroup>
      <Compile Include="Assets\DebugDrawingExtension\DebugExtension.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\Event.cs" />
+     <Compile Include="Assets\Scripts\EventData.cs" />
      <Compile Include="Assets\Scripts\EventMaster.cs" />
+     <Compile Include="Assets\Scripts\EventType.cs" />
      <Compile Include="Assets\Scripts\Factory.cs" />
      <Compile Include="Assets\Scripts\GameMaster.cs" />
      <Compile Include="Assets\Scripts\InputController.cs" />

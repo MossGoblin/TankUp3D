@@ -71,7 +71,7 @@ public class InputController : MonoBehaviour
     }
     private void DumpStack()
     {
-        Debug.Log($"Stack size = {master.player.tank.tankData.GetStackSize()} / Top: {master.player.tank.tankData.GetTopType().ToString()}");
-        Debug.Log($"Balance: {master.player.tank.speedFactor}");
+        // Debug.Log($"Stack size = {master.player.tank.tankData.GetStackSize()} / Top: {master.player.tank.tankData.GetTopType().ToString()}");
+        // Debug.Log($"Balance: {master.player.tank.speedFactor}");
     }
 }

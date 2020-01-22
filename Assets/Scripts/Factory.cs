@@ -4,15 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public static class Factory
+public class Factory : MonoBehaviour
 {
+    // set up Instance
+    public static Factory Instance {get; private set; }
     private static Dictionary<Layer, bool> layerPool;
-            //     Layer newGunLayer = new Layer(WeaponType.Gun, 100, 3);
-            // master.player.AddLayer(newGunLayer);
-            // DumpStack();
 
-    static Factory()
+    void Awake()
     {
+        // setup Instance
+        // check for conflicting Instances
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        
         layerPool = new Dictionary<Layer, bool>();
     }
 
@@ -34,6 +43,8 @@ public static class Factory
             newLayer = new Layer(type, 100, 3);
             layerPool.Add(newLayer, true);
         }
+        // Fire Event
+        EventMaster.Instance.FireEvent(EventType.LayerCreated, new EventData($"Factory: new layer {newLayer.type.ToString()}"));
         return newLayer;
     }
 
@@ -72,8 +83,8 @@ public static class Factory
             newLayer = new Layer(randomType, 100, 3);
             layerPool.Add(newLayer, true);
         }
-        // set up the new layer
-        
+        // Fire Event
+        EventMaster.Instance.FireEvent(EventType.LayerCreated, new EventData($"Factory: new RND layer {newLayer.type.ToString()}"));
         return newLayer;
     }
 

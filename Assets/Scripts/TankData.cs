@@ -58,11 +58,17 @@ public class TankData
     public void AddLayer(Layer newLayer)
     {
         layerStack.Push(newLayer);
+        // Fire Event
+        EventMaster.Instance.FireEvent(EventType.LayerAdded, new EventData($"Added {newLayer.type.ToString()}"));
+        EventMaster.Instance.FireEvent(EventType.TankUpdated, new EventData($"Tank + {newLayer.type.ToString()} = {layerStack.Count}"));
     }
 
     public Layer RemoveLayer()
     {
-        return layerStack.Pop();
+        Layer oldLayer = layerStack.Pop();
+        EventMaster.Instance.FireEvent(EventType.LayerAdded, new EventData($"Removed {oldLayer.type.ToString()}"));
+        EventMaster.Instance.FireEvent(EventType.TankUpdated, new EventData($"Tank - {oldLayer.type.ToString()} = {layerStack.Count}"));
+        return oldLayer;
     }
 
 }

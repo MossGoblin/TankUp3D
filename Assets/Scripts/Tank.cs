@@ -15,7 +15,7 @@ public class Tank : MonoBehaviour
     // modifiers
     public Vector3 originalScale;
     public float currentScaleFactor;
-    public float sizeFactor;
+    public int sizeFactor;
     public float damageFactor;
     public float speedFactor;
     public float accuracyFactor;
@@ -24,6 +24,11 @@ public class Tank : MonoBehaviour
 
     void Awake()
     {
+    }
+
+    void Start()
+    {
+        // init data
         originalScale = this.transform.localScale;
         currentScaleFactor = 1;
         tankData = new TankData();
@@ -32,12 +37,7 @@ public class Tank : MonoBehaviour
         turret = player.GetComponentInChildren<Turret>();
         CalculateFactors();
         turret.currentTurret = currentWeapon;
-        Debug.Log("Got turret");
-    }
-
-    void Start()
-    {
-        // init data
+        // Debug.Log("Got turret");
     }
 
     void Update()
@@ -70,7 +70,7 @@ public class Tank : MonoBehaviour
     }
 
 
-    private void UpdateSize(float sizeFactor)
+    private void UpdateSize(int sizeFactor)
     {
         if (currentScaleFactor != sizeFactor)
         {
@@ -80,7 +80,7 @@ public class Tank : MonoBehaviour
             float newScaleZ = originalScale.z * sigmoidFactor;
             Vector3 newScale = new Vector3(newScaleX, newScaleY, newScaleZ);
             player.transform.localScale = newScale;
-            Debug.Log($"Scale: {sigmoidFactor}");
+            Debug.Log($"Scale: {sizeFactor} - {sigmoidFactor}");
             currentScaleFactor = sizeFactor;
         }
     }

@@ -60,7 +60,7 @@ public static class ToolBox
             {
                 input += 0.01f;
             }
-            float result = (input-2)/(1+Mathf.Abs(input-2)) + 1.666666f; // \\frac{x-2}{1+\left|x-2\right|}+1.6666666666666
+            float result = (input-3)/(1+Mathf.Abs(input-3)) + 1.666666f; // \\frac{x-3}{1+\left|x-3\right|}+1.6666666666666
             return result;
         }
 }
