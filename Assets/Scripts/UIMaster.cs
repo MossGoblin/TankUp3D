@@ -12,6 +12,7 @@ public class UIMaster : MonoBehaviour
     // selfrefs
     [SerializeField] TextMeshProUGUI topLayerTextTMP;
     [SerializeField] TextMeshProUGUI playerStatsTextTMP;
+    [SerializeField] TextMeshProUGUI playerLayerStackTMP;
     [SerializeField] TextMeshProUGUI debugFeedTMP;
 
     [SerializeField] int feedLenght = 10;
@@ -37,6 +38,7 @@ public class UIMaster : MonoBehaviour
     {
         UpdateTopPlayerLayerGUI();
         UpdatePlayerStatsGUI();
+        UpdatePlayerLayerStackGUI();
         UpdateDebugFeed();
     }
 
@@ -51,7 +53,15 @@ public class UIMaster : MonoBehaviour
         int playerSize = playerTank.sizeFactor;
         float playerScale = ToolBox.Sigmoid(playerSize);
         float playerDisbalance = playerTank.speedFactor;
-        playerStatsTextTMP.text = $"Size: {playerSize}: {playerScale}\nBalance: {playerDisbalance}";
+        playerStatsTextTMP.text = $"Size: {playerSize}: {playerScale}\nDisalance: {playerDisbalance}";
+    }
+
+    private void UpdatePlayerLayerStackGUI()
+    {
+        string gunCount = playerTank.tankData.GetTypeCount(WeaponType.Gun).ToString();
+        string rocketCount = playerTank.tankData.GetTypeCount(WeaponType.Rocket).ToString();
+        string raygunCount = playerTank.tankData.GetTypeCount(WeaponType.Raygun).ToString();
+        playerLayerStackTMP.text = $"{gunCount} | {rocketCount} | {raygunCount}";
     }
     private void UpdateDebugFeed()
     {

@@ -62,7 +62,7 @@ public class InputController : MonoBehaviour
         }
 
         // NumPad '-' for removing layers
-        if (Input.GetKeyDown(KeyCode.KeypadMinus) && master.player.tank.tankData.GetStackSize() > 1)
+        if (Input.GetKey(KeyCode.KeypadMinus) && master.player.tank.tankData.GetStackSize() > 1)
         {
             Layer removedLayer = master.player.tank.tankData.RemoveLayer();
             Factory.DeactivateLayer(removedLayer);

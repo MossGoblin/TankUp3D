@@ -80,7 +80,7 @@ public class Tank : MonoBehaviour
             float newScaleZ = originalScale.z * sigmoidFactor;
             Vector3 newScale = new Vector3(newScaleX, newScaleY, newScaleZ);
             player.transform.localScale = newScale;
-            Debug.Log($"Scale: {sizeFactor} - {sigmoidFactor}");
+            // Debug.Log($"Scale: {sizeFactor} - {sigmoidFactor}");
             currentScaleFactor = sizeFactor;
         }
     }
