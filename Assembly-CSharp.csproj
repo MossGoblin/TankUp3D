@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\DebugDrawingExtension\DebugExtension.cs" />
-     <Compile Include="Assets\Scripts\AIScanner.cs" />
+     <Compile Include="Assets\Scripts\AISensor.cs" />
      <Compile Include="Assets\Scripts\AIStateMaster.cs" />
      <Compile Include="Assets\Scripts\AITargetAssessmentUnit.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
