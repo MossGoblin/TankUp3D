@@ -60,6 +60,7 @@ public class Tank : MonoBehaviour
         // private float rotationSpeedFactor; - balance
         rotationSpeedFactor = ToolBox.GetDisbalance(tankStateCollection);
 
+
         currentWeapon = tankData.GetTopType();
     }
 
