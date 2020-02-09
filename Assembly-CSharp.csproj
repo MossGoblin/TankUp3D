@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{f7b4a2d6-8b0d-eb78-eb79-2e90ee995a33}</ProjectGuid>
+    <ProjectGuid>{9df6bf87-d2fa-5ebd-6b3a-df792c7cc2c0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -46,31 +46,35 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\DebugDrawingExtension\DebugExtension.cs" />
-     <Compile Include="Assets\Scripts\AISensor.cs" />
-     <Compile Include="Assets\Scripts\AIStateMaster.cs" />
-     <Compile Include="Assets\Scripts\AITargetAssessmentUnit.cs" />
-     <Compile Include="Assets\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\AISensor.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\AIStances.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\AIStateMaster.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\AIStateSelector.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\AIStates.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\BattleContext.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\IStance.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\IState.cs" />
      <Compile Include="Assets\Scripts\Disposables\CubeMove.cs" />
-     <Compile Include="Assets\Scripts\Event.cs" />
-     <Compile Include="Assets\Scripts\EventData.cs" />
-     <Compile Include="Assets\Scripts\EventMaster.cs" />
-     <Compile Include="Assets\Scripts\EventType.cs" />
-     <Compile Include="Assets\Scripts\Factory.cs" />
-     <Compile Include="Assets\Scripts\GameMaster.cs" />
-     <Compile Include="Assets\Scripts\IState.cs" />
-     <Compile Include="Assets\Scripts\InputController.cs" />
-     <Compile Include="Assets\Scripts\Layer.cs" />
-     <Compile Include="Assets\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-     <Compile Include="Assets\Scripts\Tank.cs" />
-     <Compile Include="Assets\Scripts\TankData.cs" />
-     <Compile Include="Assets\Scripts\TargetMovement.cs" />
-     <Compile Include="Assets\Scripts\TerrainMaster.cs" />
-     <Compile Include="Assets\Scripts\ToolBox.cs" />
-     <Compile Include="Assets\Scripts\Turret.cs" />
-     <Compile Include="Assets\Scripts\TurretFollowMouse.cs" />
-     <Compile Include="Assets\Scripts\UIMaster.cs" />
-     <Compile Include="Assets\Scripts\WeaponType.cs" />
+     <Compile Include="Assets\Scripts\PlayerSpecific\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\PlayerSpecific\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\PlayerSpecific\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\PlayerSpecific\TurretFollowMouse.cs" />
+     <Compile Include="Assets\Scripts\Shared\Event.cs" />
+     <Compile Include="Assets\Scripts\Shared\EventData.cs" />
+     <Compile Include="Assets\Scripts\Shared\EventMaster.cs" />
+     <Compile Include="Assets\Scripts\Shared\EventType.cs" />
+     <Compile Include="Assets\Scripts\Shared\Factory.cs" />
+     <Compile Include="Assets\Scripts\Shared\GameMaster.cs" />
+     <Compile Include="Assets\Scripts\Shared\InputController.cs" />
+     <Compile Include="Assets\Scripts\Shared\Layer.cs" />
+     <Compile Include="Assets\Scripts\Shared\Tank.cs" />
+     <Compile Include="Assets\Scripts\Shared\TankData.cs" />
+     <Compile Include="Assets\Scripts\Shared\TargetMovement.cs" />
+     <Compile Include="Assets\Scripts\Shared\TerrainMaster.cs" />
+     <Compile Include="Assets\Scripts\Shared\ToolBox.cs" />
+     <Compile Include="Assets\Scripts\Shared\Turret.cs" />
+     <Compile Include="Assets\Scripts\Shared\UIMaster.cs" />
+     <Compile Include="Assets\Scripts\Shared\WeaponType.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -657,39 +661,35 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.Timeline.Editor.csproj">
-      <Project>{12dfe031-1ef4-318b-6816-a01fad209357}</Project>
+      <Project>{e1c6872a-bbed-5c95-6e05-4a4175d4411c}</Project>
       <Name>Unity.Timeline.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
-      <Project>{133d9ffe-c2a5-5e9b-fdde-9156e713d5cb}</Project>
+      <Project>{d386726c-8574-067d-8e12-7119651eac91}</Project>
       <Name>Unity.VSCode.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
-      <Project>{9fd9617f-10c0-089f-d811-1a629b54767c}</Project>
+      <Project>{b90c7a60-e097-618f-e7f7-cd848fd8cbc1}</Project>
       <Name>Unity.TextMeshPro.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{df4b5c02-1448-e882-1e65-27e906835d82}</Project>
+      <Project>{e4d6491f-5ab9-3092-252b-881f53e3098f}</Project>
       <Name>UnityEngine.UI</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Timeline.csproj">
-      <Project>{d9b51c99-d8b5-5361-21c8-65d811bf4671}</Project>
+      <Project>{5f8a6fed-6ae7-cdf1-0ef8-876c1fec898b}</Project>
       <Name>Unity.Timeline</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.CollabProxy.Editor.csproj">
-      <Project>{b8c59312-89fc-28ac-fc52-40fdea4d2233}</Project>
+      <Project>{9aad94b6-9d7b-28ff-1f6f-947f027ded58}</Project>
       <Name>Unity.CollabProxy.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Rider.Editor.csproj">
-      <Project>{07581341-1ae2-7005-bf79-fc5f551b3de3}</Project>
-      <Name>Unity.Rider.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{f7de6cea-5c9a-16d6-b72a-3bce472a29ea}</Project>
+      <Project>{522d5e74-3110-993e-25ba-e41ebf973a33}</Project>
       <Name>Unity.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{36a32bfd-ee76-5078-784f-f9635845315b}</Project>
+      <Project>{410cd508-41f8-9050-ff51-3645296ba798}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

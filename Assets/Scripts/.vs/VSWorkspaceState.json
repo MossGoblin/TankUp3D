@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\AISpecific"
   ],
-  "SelectedNode": "\\IState.cs",
+  "SelectedNode": "\\AISpecific\\BattleContext.cs",
   "PreviewInSolutionExplorer": false
 }
