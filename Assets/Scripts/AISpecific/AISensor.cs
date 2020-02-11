@@ -5,24 +5,13 @@ using UnityEngine;
 
 /// <summary>
 /// Scans the surroundings of the AITank (on Update) for interactble objects
-/// Performs self-assessment
+/// Performs self-assessment ??
 /// </summary>
 public class AISensor : MonoBehaviour
 {
     // refs
     [SerializeField] float sensorRadius;
-    List<GameObject> objectsInRange;
-
-    void Awake()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public List<GameObject> objectsInRange { get; private set; }
 
     void FixedUpdate()
     {
@@ -30,7 +19,7 @@ public class AISensor : MonoBehaviour
         ReportOnObjectsInRange(objectsInRange);
     }
 
-    private void ReportOnObjectsInRange(List<GameObject> objectsInRange)
+    private void ReportOnObjectsInRange(List<GameObject> objectsInRange) // FIXME : Debug Only
     {
         foreach (var obj in objectsInRange)
         {
@@ -54,28 +43,4 @@ public class AISensor : MonoBehaviour
         }
         return objectsInRange;
     }
-
-    // private void OnTriggerEnter(Collider other) {
-    //     if (other.gameObject.layer == 9 && other != this)
-    //     {
-    //         Debug.Log($"Enter {other.gameObject.name}");
-    //     }
-    // }
-
-    // private void OnTriggerStay(Collider other) {
-    //     if (other.gameObject.layer == 9 && other != this)
-    //     {
-    //         Debug.Log($"{other.gameObject.name} in range");
-    //     }
-    // }
-
-    /*
-     Collider[] hitColliders = Physics.OverlapSphere(center, radius);
-        int i = 0;
-        while (i < hitColliders.Length)
-        {
-            hitColliders[i].SendMessage("AddDamage");
-            i++;
-        }
-    */
 }

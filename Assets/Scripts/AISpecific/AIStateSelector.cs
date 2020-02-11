@@ -1,8 +1,8 @@
 public static class AIStateSelector
 {
-    public static AIState SelectState(AIStance currentStance, AIState currentState, BattleContext currentContext)
+    public static (AIStance stance, AIState state) SelectState(AIStance currentStance, AIState currentState, BattleContext currentContext)
     {
         // TODO : HERE - ALL THE STATE LOGIC GOES HERE
-        return AIState.Roam;
+        return (AIStance.Balanced, AIState.Roam);
     }
 }
