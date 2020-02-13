@@ -9,6 +9,7 @@ public class Factory : MonoBehaviour
     // set up Instance
     public static Factory Instance {get; private set; }
     private static Dictionary<Layer, bool> layerPool;
+    private static Dictionary<SensorPackage, bool> packagePool;
 
     void Awake()
     {
@@ -23,8 +24,26 @@ public class Factory : MonoBehaviour
 
         
         layerPool = new Dictionary<Layer, bool>();
+        packagePool = new Dictionary<SensorPackage, bool>();
     }
 
+    public static SensorPackage CreateSensorPackage()
+    {
+        SensorPackage newPackage;
+
+        if (packagePool.Count > 0 && packagePool.ContainsValue(false))
+        {
+            newPackage = packagePool.FirstOrDefault(p => p.Value == false).Key;
+            packagePool[newPackage] = true;
+        }
+        else
+        {
+            newPackage = new SensorPackage();
+            packagePool.Add(newPackage, true);
+        }
+
+        return newPackage;
+    }
     public static Layer CreateLayer(WeaponType type)
     {
         Layer newLayer;
