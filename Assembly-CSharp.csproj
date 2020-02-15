@@ -68,8 +68,10 @@
      <Compile Include="Assets\Scripts\Shared\EventType.cs" />
      <Compile Include="Assets\Scripts\Shared\Factory.cs" />
      <Compile Include="Assets\Scripts\Shared\GameMaster.cs" />
+     <Compile Include="Assets\Scripts\Shared\IProduct.cs" />
      <Compile Include="Assets\Scripts\Shared\InputController.cs" />
      <Compile Include="Assets\Scripts\Shared\Layer.cs" />
+     <Compile Include="Assets\Scripts\Shared\PoolManager.cs" />
      <Compile Include="Assets\Scripts\Shared\Tank.cs" />
      <Compile Include="Assets\Scripts\Shared\TankData.cs" />
      <Compile Include="Assets\Scripts\Shared\TargetMovement.cs" />

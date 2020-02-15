@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Layer
+public class Layer : IProduct
 {
     // type
     public WeaponType type { get; private set; }

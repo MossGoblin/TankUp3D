@@ -19,7 +19,15 @@ public class TankData
     public TankData()
     {
         layerStack = new Stack<Layer>();
-        layerStack.Push(Factory.CreateRandomLayer());
+        WeaponType randomWeaponType = CreateRandomWeaponType();
+        Layer randomLayer = (Layer)Factory<Layer>.ProduceObject(PoolManager.instance);
+        randomLayer.SetLayerBase(randomWeaponType, 100, 3);
+        layerStack.Push(randomLayer);
+    }
+
+    private WeaponType CreateRandomWeaponType()
+    {
+        return (WeaponType)UnityEngine.Random.Range(0, 2);
     }
 
     public int GetStackSize()

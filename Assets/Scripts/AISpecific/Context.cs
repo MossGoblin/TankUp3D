@@ -50,7 +50,7 @@ public class Context
 
     private SensorPackage CreateSensorPackage()
     {
-        SensorPackage package = Factory.CreateSensorPackage();
+        SensorPackage package = (SensorPackage)Factory<SensorPackage>.ProduceObject(PoolManager.instance);
         package.NumberOfAgents = agentsList.Count;
         package.TotalSizeOfAgents = GetTotalSize(agentsList);
         package.MaxSizeOfAgents = GetMaxSize(agentsList);

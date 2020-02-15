@@ -1,110 +1,99 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
-public class Factory : MonoBehaviour
+public static class Factory<T> where T : IProduct
 {
-    // set up Instance
-    public static Factory Instance {get; private set; }
-    private static Dictionary<Layer, bool> layerPool;
-    private static Dictionary<SensorPackage, bool> packagePool;
-
-    void Awake()
+    public static IProduct ProduceObject(PoolManager pooler)
     {
-        // setup Instance
-        // check for conflicting Instances
-        if (Instance != null && Instance != this)
+        Type objectType = typeof(T);
+        // check if the pooler has the appopriate pool
+        if (pooler.pools.ContainsKey(objectType)) // the pooler has the type pool
         {
-            Destroy(gameObject);
+            // check if there is an available object
+            if (pooler.pools[objectType].ContainsValue(false)) // there is an available object
+            {
+                // extract the object
+                IProduct activatedObject = pooler.pools[objectType].FirstOrDefault(p => p.Value == false).Key;
+                // mark it as activated
+                pooler.pools[objectType][activatedObject] = true;
+                // return the activated object
+                return activatedObject;
+            }
+            else // there is no available object
+            {
+                // create new object
+                IProduct newObjectTypeAsIPoolable = (IProduct)Activator.CreateInstance(objectType);
+                // pool the object
+                pooler.pools[objectType].Add(newObjectTypeAsIPoolable, true);
+                // return the object
+                return newObjectTypeAsIPoolable;
+            }
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
-        
-        layerPool = new Dictionary<Layer, bool>();
-        packagePool = new Dictionary<SensorPackage, bool>();
-    }
-
-    public static SensorPackage CreateSensorPackage()
-    {
-        SensorPackage newPackage;
-
-        if (packagePool.Count > 0 && packagePool.ContainsValue(false))
+        else // the pooler does NOT have the type pool
         {
-            newPackage = packagePool.FirstOrDefault(p => p.Value == false).Key;
-            packagePool[newPackage] = true;
+            // create the pool
+            Dictionary<IProduct, bool> newTypeDictionary = new Dictionary<IProduct, bool>();
+            pooler.pools.Add(objectType, newTypeDictionary);
+            // create new object
+            IProduct newObjectTypeAsIPoolable = (IProduct)Activator.CreateInstance(objectType);
+            // pool the new object
+            newTypeDictionary.Add(newObjectTypeAsIPoolable, true);
+            // return the new object
+            return newObjectTypeAsIPoolable;
+        }
+    }
+    public static string RemoveObject(PoolManager pooler, IProduct removable)
+    {
+        // get the type of the object that is to be removed
+        Type objectType = removable.GetType();
+        // check if the pool exists
+        if (pooler.pools.ContainsKey(objectType)) // the pooler contains the type pool
+        {
+            // check if the object exists
+            if (pooler.pools[objectType].ContainsKey(removable)) // the pool contains the object
+            {
+                // check if the object is active
+                if (pooler.pools[objectType][removable] == true) // the object is active
+                {
+                    // deactivate object
+                    pooler.pools[objectType][removable] = false;
+                }
+                else // the object is not active
+                {
+                    return $"The object is not active ({removable.ToString()})";
+                }
+            }
+            else
+            {
+                return $"No such object in the pools ({removable.ToString()})";
+            }
+        }
+        else // the pool does not contain the pool type
+        {
+            return $"There is no pool for the object ({removable.ToString()})";
+        }
+        return String.Empty; // default return
+    }
+    public static List<IProduct> ListPooledObjects(PoolManager pooler, Type objectType, bool activeOnly)
+    {
+        // check if there is a pool of the corresponding type
+        if (pooler.pools.ContainsKey(objectType))
+        {
+            List<IProduct> resultList = new List<IProduct>();
+            foreach (var item in pooler.pools[objectType])
+            {
+                if (item.Value == activeOnly || activeOnly == false)
+                {
+                    resultList.Add(item.Key);
+                }
+            }
+            return resultList;
         }
         else
         {
-            newPackage = new SensorPackage();
-            packagePool.Add(newPackage, true);
+            return null;
         }
-
-        return newPackage;
+        // TODO : HERE
     }
-    public static Layer CreateLayer(WeaponType type)
-    {
-        Layer newLayer;
-        // check for inacive layers
-        if (layerPool.Count > 0 && layerPool.ContainsValue(false))
-        {
-            // find a deactivated layer
-            newLayer = layerPool.FirstOrDefault(l => l.Value == false).Key;
-            // set it up
-            newLayer.SetLayerBase(type, 100, 3);
-            // activate it
-            layerPool[newLayer] = true;
-        }
-        else
-        {
-            newLayer = new Layer(type, 100, 3);
-            layerPool.Add(newLayer, true);
-        }
-        // Fire Event
-        EventMaster.Instance.FireEvent(EventType.LayerCreated, new EventData($"Factory: new layer {newLayer.type.ToString()}"));
-        return newLayer;
-    }
-
-    public static void DeactivateLayer(Layer layer)
-    {
-        if (!layerPool.ContainsKey(layer))
-        {
-            throw new KeyNotFoundException("The removed layer was NOT registered with the factory!");
-        }
-        else
-        {
-            layerPool[layer] = false;
-        }
-    }
-
-    public static Layer CreateRandomLayer()
-    {
-        Layer newLayer;
-
-        int randomTypeIndex = UnityEngine.Random.Range(0, 3);
-        Array types = Enum.GetValues(typeof(WeaponType));
-        WeaponType randomType = (WeaponType)types.GetValue(randomTypeIndex);
-
-        // check for inacive layers
-        if (layerPool.Count > 0 && layerPool.ContainsValue(false))
-        {
-            // find a deactivated layer
-            newLayer = layerPool.FirstOrDefault(l => l.Value == false).Key;
-            // set it up
-            newLayer.SetLayerBase(randomType, 100, 3);
-            // activate it
-            layerPool[newLayer] = true;
-        }
-        else
-        {
-            newLayer = new Layer(randomType, 100, 3);
-            layerPool.Add(newLayer, true);
-        }
-        // Fire Event
-        EventMaster.Instance.FireEvent(EventType.LayerCreated, new EventData($"Factory: new RND layer {newLayer.type.ToString()}"));
-        return newLayer;
-    }
-
 }
