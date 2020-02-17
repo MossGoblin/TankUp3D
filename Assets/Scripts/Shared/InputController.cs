@@ -41,21 +41,21 @@ public class InputController : MonoBehaviour
         // 1-3 for Custom Layers
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Layer newGunLayer = (Layer)Factory<Layer>.ProduceObject(PoolManager.instance);
+            Layer newGunLayer = (Layer)Factory<Layer>.ProduceObject(master.poolMaster);
             newGunLayer.SetLayerBase(WeaponType.Gun, 100, 3);
             master.player.AddLayer(newGunLayer);
             DumpStack();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Layer newRocketLayer = (Layer)Factory<Layer>.ProduceObject(PoolManager.instance);
+            Layer newRocketLayer = (Layer)Factory<Layer>.ProduceObject(master.poolMaster);
             newRocketLayer.SetLayerBase(WeaponType.Rocket, 100, 3);
             master.player.AddLayer(newRocketLayer);
             DumpStack();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Layer newRaygunLayer = (Layer)Factory<Layer>.ProduceObject(PoolManager.instance);
+            Layer newRaygunLayer = (Layer)Factory<Layer>.ProduceObject(master.poolMaster);
             newRaygunLayer.SetLayerBase(WeaponType.Raygun, 100, 3);
             master.player.AddLayer(newRaygunLayer);
             DumpStack();
@@ -65,7 +65,7 @@ public class InputController : MonoBehaviour
         if (Input.GetKey(KeyCode.KeypadMinus) && master.player.tank.tankData.GetStackSize() > 1)
         {
             Layer removedLayer = master.player.tank.tankData.RemoveLayer();
-            Factory<Layer>.RemoveObject(PoolManager.instance, removedLayer);
+            Factory<Layer>.RemoveObject(master.poolMaster, removedLayer);
             DumpStack();
         }
     }

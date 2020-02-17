@@ -7,10 +7,11 @@ public class Tank : MonoBehaviour
 {
     // refs
     PlayerController player;
+    GameObject owner;
     // Data
     public TankData tankData;
     private WeaponType currentWeapon;
-    private Turret turret;
+    [SerializeField] private Turret turret;
 
     // modifiers
     public Vector3 originalScale;
@@ -21,9 +22,11 @@ public class Tank : MonoBehaviour
     public float accuracyFactor;
     public float rotationSpeedFactor;
 
-
     void Awake()
     {
+        tankData = new TankData();
+        // player = GetComponentInParent<PlayerController>();
+        owner = this.gameObject;
     }
 
     void Start()
@@ -31,10 +34,8 @@ public class Tank : MonoBehaviour
         // init data
         originalScale = this.transform.localScale;
         currentScaleFactor = 1;
-        tankData = new TankData();
-        player = GetComponentInParent<PlayerController>();
         // Debug.Log("Got player: " + player.ToString());
-        turret = player.GetComponentInChildren<Turret>();
+        // turret = player.GetComponentInChildren<Turret>();
         CalculateFactors();
         turret.currentTurret = currentWeapon;
         // Debug.Log("Got turret");
@@ -80,7 +81,8 @@ public class Tank : MonoBehaviour
             float newScaleY = originalScale.y * sigmoidFactor;
             float newScaleZ = originalScale.z * sigmoidFactor;
             Vector3 newScale = new Vector3(newScaleX, newScaleY, newScaleZ);
-            player.transform.localScale = newScale;
+            // player.transform.localScale = newScale;
+            owner.transform.localScale = newScale;
             // Debug.Log($"Scale: {sizeFactor} - {sigmoidFactor}");
             currentScaleFactor = sizeFactor;
         }

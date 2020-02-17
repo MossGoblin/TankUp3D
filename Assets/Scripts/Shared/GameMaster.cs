@@ -9,6 +9,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField] public TerrainMaster gridMaster;
     [SerializeField] public CameraControl cameraMaster;
     [SerializeField] public InputController inputMaster;
+    [SerializeField] public PoolManager poolMaster;
 
     void Awake()
     {
@@ -16,6 +17,7 @@ public class GameMaster : MonoBehaviour
         gridMaster = GameObject.FindObjectOfType<TerrainMaster>();
         cameraMaster = GameObject.FindObjectOfType<CameraControl>();
         inputMaster = GameObject.FindObjectOfType<InputController>();
+        poolMaster = GameObject.FindObjectOfType<PoolManager>();
     }
 
 }

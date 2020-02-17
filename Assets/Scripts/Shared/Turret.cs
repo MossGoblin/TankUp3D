@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject owner;
     [SerializeField] private GameObject[] tankTurretModels;
     [SerializeField] private GameObject tankRocket;
     public WeaponType currentTurret;
 
     private void Awake()
     {
-        player = GetComponentInParent<PlayerController>().gameObject;
+        owner = this.gameObject;
         tankRocket.SetActive(false);
     }
     private void Start() 

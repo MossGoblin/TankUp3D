@@ -13,13 +13,17 @@ public class AISensor : MonoBehaviour
     [SerializeField] float sensorRadius;
     public List<GameObject> objectsInRange { get; private set; }
 
+    private void Awake()
+    {
+        objectsInRange = ObjectsInRange();
+    }
     void FixedUpdate()
     {
         objectsInRange = ObjectsInRange();
-        ReportOnObjectsInRange(objectsInRange);
+        ReportObjectsInRange(objectsInRange);
     }
 
-    private void ReportOnObjectsInRange(List<GameObject> objectsInRange) // FIXME : Debug Only
+    private void ReportObjectsInRange(List<GameObject> objectsInRange) // FIXME : Debug Only
     {
         foreach (var obj in objectsInRange)
         {

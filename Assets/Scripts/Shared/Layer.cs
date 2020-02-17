@@ -10,6 +10,11 @@ public class Layer : IProduct
     public float durability { get; private set; }
     public int uses { get; private set; }
 
+    public Layer()
+    {
+    
+    }
+
     public Layer(WeaponType type, float durability, int uses)
     {
         this.type = type;

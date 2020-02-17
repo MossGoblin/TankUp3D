@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Context
 {
+    GameMaster master;
     public int fPrint { get; private set; }
     public SensorPackage sensorPackage;
     public Tank contextOwner { get; private set; }
@@ -13,6 +14,7 @@ public class Context
 
     public Context(List<GameObject> targetList, Tank owner)
     {
+        master = GameObject.FindObjectOfType<GameMaster>();
         this.contextOwner = owner;
         this.ownSize = owner.tankData.GetStackSize();
         agentsList = new List<GameObject>();
@@ -30,27 +32,33 @@ public class Context
         
         /*
          2. list of variables:
-         -. number of agents - int
-         -. total size of agents - int
-         -. size of largest agent - int
-         -. presence of layers - bool
-         -. presence of upgrades - bool
+         -. number of agents - * 1000
+         -. total size of agents - * 100
+         -. presence of layers and upgrades * 1
         */
 
         // Let's try a simple int fingerprint // FIXME : Not sure this fPrint is the best way forward
         fPrint += 
             agentsList.Count * 10000 +
-            GetTotalSize(agentsList) * 1000 +
-            GetMaxSize(agentsList) * 100 +
-            LayersPresence(assetList) * 10 +
-            UpgradesPresence(assetList);
+            GetTotalSize(agentsList) * 100 +
+            (LayersPresence(assetList) + UpgradesPresence(assetList));
         
         return fPrint;
     }
 
+    public void Update(List<GameObject> targetList)
+    {
+        this.ownSize = contextOwner.tankData.GetStackSize();
+        agentsList = new List<GameObject>();
+        assetList = new List<GameObject>();
+        SortActorsAndAssets(targetList);
+        fPrint = CreateFingerPrint();
+        sensorPackage = CreateSensorPackage(); // for struct comparison use struct1.Equals(struct2);    
+    }
+
     private SensorPackage CreateSensorPackage()
     {
-        SensorPackage package = (SensorPackage)Factory<SensorPackage>.ProduceObject(PoolManager.instance);
+        SensorPackage package = (SensorPackage)Factory<SensorPackage>.ProduceObject(master.poolMaster);
         package.NumberOfAgents = agentsList.Count;
         package.TotalSizeOfAgents = GetTotalSize(agentsList);
         package.MaxSizeOfAgents = GetMaxSize(agentsList);

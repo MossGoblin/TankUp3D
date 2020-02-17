@@ -9,18 +9,21 @@ public class TankData
     // stack
     public Stack<Layer> layerStack { get; private set; }
 
+    GameMaster master;
 
     public TankData(Layer initLayer)
     {
+        master = GameObject.FindObjectOfType<GameMaster>();
         layerStack = new Stack<Layer>();
         layerStack.Push(initLayer);
     }
 
     public TankData()
     {
+        master = GameObject.FindObjectOfType<GameMaster>();
         layerStack = new Stack<Layer>();
         WeaponType randomWeaponType = CreateRandomWeaponType();
-        Layer randomLayer = (Layer)Factory<Layer>.ProduceObject(PoolManager.instance);
+        Layer randomLayer = (Layer)Factory<Layer>.ProduceObject(master.poolMaster);
         randomLayer.SetLayerBase(randomWeaponType, 100, 3);
         layerStack.Push(randomLayer);
     }
