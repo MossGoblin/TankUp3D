@@ -2,8 +2,6 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <CscToolPath>C:\Program Files\Unity\Hub\Editor\2019.3.1f1\Editor\Data\Tools\RoslynScripts</CscToolPath>
-    <CscToolExe>unity_csc.bat</CscToolExe>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{D6A2B4F7-0D8B-78EB-EB79-2E90EE995A33}</ProjectGuid>
+    <ProjectGuid>{f7b4a2d6-8b0d-eb78-eb79-2e90ee995a33}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -47,24 +45,17 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2019.3.1f1\Editor\Data\Managed/UnityEngine/UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2019.3.1f1\Editor\Data\Managed/UnityEditor.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
      <Compile Include="Assets\DebugDrawingExtension\DebugExtension.cs" />
-     <Compile Include="Assets\Scripts\AISpecific\AISensor.cs" />
-     <Compile Include="Assets\Scripts\AISpecific\AIStances.cs" />
-     <Compile Include="Assets\Scripts\AISpecific\AIStateMaster.cs" />
-     <Compile Include="Assets\Scripts\AISpecific\AIStateSelector.cs" />
-     <Compile Include="Assets\Scripts\AISpecific\AIStates.cs" />
-     <Compile Include="Assets\Scripts\AISpecific\AITankState.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\AutoTankState.cs" />
      <Compile Include="Assets\Scripts\AISpecific\Context.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\Sensor.cs" />
      <Compile Include="Assets\Scripts\AISpecific\SensorPackage.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\Stances.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\StateMaster.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\StateSelector.cs" />
+     <Compile Include="Assets\Scripts\AISpecific\States.cs" />
      <Compile Include="Assets\Scripts\Disposables\CubeMove.cs" />
+     <Compile Include="Assets\Scripts\Disposables\CubeTank.cs" />
      <Compile Include="Assets\Scripts\PlayerSpecific\CameraControl.cs" />
      <Compile Include="Assets\Scripts\PlayerSpecific\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PlayerSpecific\PlayerMovement.cs" />
@@ -144,29 +135,8 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
- <Reference Include="Unity.Timeline.Editor">
- <HintPath>D:/[ CODEE ]/[ GITTED ]/TankUp3D/TankUp/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.VSCode.Editor">
- <HintPath>D:/[ CODEE ]/[ GITTED ]/TankUp3D/TankUp/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>D:/[ CODEE ]/[ GITTED ]/TankUp3D/TankUp/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>D:/[ CODEE ]/[ GITTED ]/TankUp3D/TankUp/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Timeline">
- <HintPath>D:/[ CODEE ]/[ GITTED ]/TankUp3D/TankUp/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
- </Reference>
- <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>D:/[ CODEE ]/[ GITTED ]/TankUp3D/TankUp/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TextMeshPro">
- <HintPath>D:/[ CODEE ]/[ GITTED ]/TankUp3D/TankUp/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UI">
- <HintPath>D:/[ CODEE ]/[ GITTED ]/TankUp3D/TankUp/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <Reference Include="UnityEngine">
+ <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -344,6 +314,9 @@
  </Reference>
  <Reference Include="UnityEngine.XRModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor">
+ <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.1f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.1f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -691,8 +664,42 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.1f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
  </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Unity.Timeline.Editor.csproj">
+      <Project>{12dfe031-1ef4-318b-6816-a01fad209357}</Project>
+      <Name>Unity.Timeline.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VSCode.Editor.csproj">
+      <Project>{133d9ffe-c2a5-5e9b-fdde-9156e713d5cb}</Project>
+      <Name>Unity.VSCode.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
+      <Project>{9fd9617f-10c0-089f-d811-1a629b54767c}</Project>
+      <Name>Unity.TextMeshPro.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{df4b5c02-1448-e882-1e65-27e906835d82}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Timeline.csproj">
+      <Project>{d9b51c99-d8b5-5361-21c8-65d811bf4671}</Project>
+      <Name>Unity.Timeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.CollabProxy.Editor.csproj">
+      <Project>{b8c59312-89fc-28ac-fc52-40fdea4d2233}</Project>
+      <Name>Unity.CollabProxy.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.TextMeshPro.csproj">
+      <Project>{f7de6cea-5c9a-16d6-b72a-3bce472a29ea}</Project>
+      <Name>Unity.TextMeshPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{36a32bfd-ee76-5078-784f-f9635845315b}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

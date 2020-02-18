@@ -29,6 +29,12 @@ public class Tank : MonoBehaviour
         owner = this.gameObject;
     }
 
+    public void Init()
+    {
+        tankData = new TankData();
+        // player = GetComponentInParent<PlayerController>();
+        owner = this.gameObject;
+    }
     void Start()
     {
         // init data

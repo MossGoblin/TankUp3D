@@ -16,6 +16,10 @@ public class Context
     {
         master = GameObject.FindObjectOfType<GameMaster>();
         this.contextOwner = owner;
+        if (owner.tankData == null)
+        {
+            owner.Init();
+        }
         this.ownSize = owner.tankData.GetStackSize();
         agentsList = new List<GameObject>();
         assetList = new List<GameObject>();

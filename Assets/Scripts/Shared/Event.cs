@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Event // WILL BE DEPRECATED; APPARENTLY NOT NEEDED AT THE MOMENT
+public class Event // FIXME : WILL BE DEPRECATED; APPARENTLY NOT NEEDED AT THE MOMENT
 {
     public EventType eventType { get; private set; }
     public EventData eventData { get; private set; }
