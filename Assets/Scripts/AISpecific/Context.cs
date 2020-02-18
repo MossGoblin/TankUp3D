@@ -118,15 +118,18 @@ public class Context
 
     private void SortActorsAndAssets(List<GameObject> targetList)
     {
-        foreach (GameObject target in targetList)
+        if (targetList != null)
         {
-            if (target.gameObject.layer == 9) // if the target is a combatant
+            foreach (GameObject target in targetList)
             {
-                agentsList.Add(target);
-            }
-            else if (target.gameObject.layer == 10) // if the target is a pickup
-            {
-                assetList.Add(target);
+                if (target.gameObject.layer == 9) // if the target is a combatant
+                {
+                    agentsList.Add(target);
+                }
+                else if (target.gameObject.layer == 10) // if the target is a pickup
+                {
+                    assetList.Add(target);
+                }
             }
         }
     }

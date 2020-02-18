@@ -7,6 +7,9 @@ public static class Factory<T> where T : IProduct
     public static IProduct ProduceObject(PoolManager pooler)
     {
         Type objectType = typeof(T);
+
+        // check if the pool has been initialized
+        pooler.Init();
         // check if the pooler has the appopriate pool
         if (pooler.pools.ContainsKey(objectType)) // the pooler has the type pool
         {
@@ -38,7 +41,8 @@ public static class Factory<T> where T : IProduct
             // create new object
             IProduct newObjectTypeAsIPoolable = (IProduct)Activator.CreateInstance(objectType);
             // pool the new object
-            newTypeDictionary.Add(newObjectTypeAsIPoolable, true);
+            pooler.pools[objectType].Add(newObjectTypeAsIPoolable, true);
+            // newTypeDictionary.Add(newObjectTypeAsIPoolable, true);
             // return the new object
             return newObjectTypeAsIPoolable;
         }

@@ -21,4 +21,12 @@ public class PoolManager : MonoBehaviour
         
         pools = new Dictionary<Type, Dictionary<IProduct, bool>>();
     }
+
+    public void Init()
+    {
+        if (pools == null)
+        {
+            pools = new Dictionary<Type, Dictionary<IProduct, bool>>();
+        }
+    }
 }
